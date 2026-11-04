@@ -215,4 +215,4 @@ httpx==0.25.2
 
 ## 👨‍💻 Author
 
-**Canute Fernandes** — [canutef7@gmail.com](mailto:canutef7@gmail.com) · [LinkedIn](https://linkedin.com/in/canute7)
+**Canute Fernandes** — [canutef7@gmail.com](mailto:canutef7@gmail.com) · [LinkedIn](https://linkedin.com/in/canutef7)
