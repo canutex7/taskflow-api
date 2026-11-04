@@ -12,9 +12,9 @@ A production-ready RESTful Task Management API built with **FastAPI**, featuring
 |-------|---------------|
 | REST API Design | Clean resource-based routes, proper HTTP verbs/status codes |
 | Authentication | JWT access tokens + refresh token rotation |
-| ORM + Database | SQLAlchemy models, migrations via Alembic |
+| ORM + Database | SQLAlchemy models, tables auto-created on startup |
 | Input Validation | Pydantic schemas with custom validators |
-| Testing | 90%+ coverage with pytest + TestClient |
+| Testing | 26 pytest tests, 97% coverage (measured) |
 | Docker | Multi-stage Dockerfile, docker-compose setup |
 | Documentation | Auto-generated Swagger UI at `/docs` |
 
@@ -44,7 +44,7 @@ taskflow-api/
 │   ├── conftest.py       # Test fixtures (DB, client, auth headers)
 │   ├── test_auth.py
 │   └── test_tasks.py
-├── alembic/              # DB migrations
+├── pytest.ini
 ├── Dockerfile
 ├── docker-compose.yml
 ├── requirements.txt
@@ -70,7 +70,6 @@ Swagger docs at `http://localhost:8000/docs`
 
 ```bash
 pip install -r requirements.txt
-alembic upgrade head
 uvicorn app.main:app --reload
 ```
 
@@ -169,7 +168,7 @@ curl http://localhost:8000/tasks?status=pending&priority=high&sort=due_date \
 pytest tests/ -v --cov=app --cov-report=term-missing
 ```
 
-Test coverage includes: registration validation, duplicate email rejection, login flow, token expiry, task CRUD, ownership enforcement, filtering logic.
+Test coverage includes: registration validation, duplicate email rejection, login flow, refresh token validation, task CRUD, ownership enforcement, filtering logic.
 
 ---
 
@@ -203,11 +202,11 @@ services:
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 sqlalchemy==2.0.23
-alembic==1.12.1
 pydantic-settings==2.1.0
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 pytest==7.4.3
+pytest-cov==4.1.0
 httpx==0.25.2
 ```
 
